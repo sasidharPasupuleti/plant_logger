@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hydration Team</title>
+  <link rel="stylesheet" type="text/css" href="/public/styles.css">
+  <style>
+    /* CSS styles here */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>I'm Groot</h1>
+    <iframe src='https://my.spline.design/plantheartcopy-9b4397690cff2953b7609ba94601142d/' frameborder='0' width='100%' height='100%'></iframe>
+    <p class="last-log">Last watered at: <span id="lastLog"><%= lastLine %></span></p>
+    <p class="time-difference">(Before: <%= timeDifference.toFixed(2) %> hours)</p>
+    <button onclick="checkIn()">Check-in</button>
+    <p>Hope I can thank you with an amount of oxygen bigger than your help</p>
+    <script>
+      function checkIn() {
+        const currentDate = new Date().toLocaleString();
+        fetch('/log', {
+          method: 'POST',
+          body: currentDate
+        })
+          .then(() => {
+            alert('Check-in successful!');
+            location.reload(); // Reload the page after successful check-in
+          })
+          .catch((error) => {
+            console.error('Check-in error:', error);
+          });
+      }
+    </script>
+  </div>
+</body>
+</html>
